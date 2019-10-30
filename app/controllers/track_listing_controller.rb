@@ -1,5 +1,5 @@
 class TrackListingController < ApplicationController
-    def index
-        render component: 'TrackListing'
+    def show
+        render component: 'TrackListing', props: {}
     end
 end

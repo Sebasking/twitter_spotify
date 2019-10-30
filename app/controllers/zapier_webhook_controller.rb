@@ -6,7 +6,6 @@ class ZapierWebhookController < ApplicationController
             # byebug
             render :json => {:status => 200}
         rescue
-            binding.pry
             render :json => {:status => 400}
         end
     end

@@ -5,7 +5,7 @@ class SpotifyController < ApplicationController
       client_id: '',
       client_secret: '',
       code: params[:code],
-      redirect_uri: 'https://c4698f32.ngrok.io/spotify_auth',
+      redirect_uri: 'https://09168547.ngrok.io/spotify_auth',
       grant_type: 'authorization_code',
     }
 
@@ -27,7 +27,7 @@ class SpotifyController < ApplicationController
     query_params = {
       client_id: '',
       response_type: "code",
-      redirect_uri: 'https://c4698f32.ngrok.io/spotify_auth',
+      redirect_uri: 'https://09168547.ngrok.io/spotify_auth',
       scope: 'playlist-modify-public',
       show_dialog: false
 

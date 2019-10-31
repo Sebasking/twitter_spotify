@@ -57,3 +57,4 @@ gem "react-rails", "~> 2.6"
 gem 'faraday'
 gem 'sidekiq'
 gem 'rest-client'
+gem 'pry'

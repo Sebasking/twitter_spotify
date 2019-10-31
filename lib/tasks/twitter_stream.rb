@@ -92,17 +92,25 @@
 #   raise "An error occurred while adding rules: #{@response.status_message}" unless @response.success?
 # end
 def parse_payload(chunk)
-    text = chunk["text"]
-    song_info = text.split("#")[0]
-    retweets = chunk["stats"]["retweet_count"]
-    puts song_info
-
-    # make request to zapier 
+    begin
+    data = JSON.parse(chunk)
+    if data
+      info = data["data"]
+      text = info['text'].split("#")[0].rstrip.gsub(/ /, "+")
+      puts text
+      # song_info = text.split("#")[0]
+      # retweets = chunk["stats"]["retweet_count"]
+      # puts song_info
+    end
+    rescue
+      puts "No data chunk was #{chunk}"
+    end
+    # make request to zapier
+    # talk to spotify for the place list
 end
 
 def stream_connect
   @options = {
-    timeout: 20,
     method: 'get',
     headers: {
       "Authorization": "Bearer",
@@ -114,9 +122,7 @@ def stream_connect
 
   @request = Typhoeus::Request.new(@stream_url, @options)
   @request.on_body do |chunk|
-    puts chunk
     parse_payload(chunk)
-    https://hooks.zapier.com/hooks/catch/4691247/ouno7ir/
   end
   @request.run
 end

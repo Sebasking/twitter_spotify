@@ -259,7 +259,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 6.0.0)
-  react-rails (~> 2.6)
+  react-rails
   rest-client
   sass-rails (~> 5)
   selenium-webdriver

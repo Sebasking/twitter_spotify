@@ -17,7 +17,6 @@ export default class TrackRow extends React.Component {
           {track.title}
         </StyledTableCell>
         <StyledTableCell align="right">{track.artist_name}</StyledTableCell>
-        <StyledTableCell align="right">{track.twitter_username}</StyledTableCell>
         <StyledTableCell align="center">
           {1}
           {this.renderArrow}

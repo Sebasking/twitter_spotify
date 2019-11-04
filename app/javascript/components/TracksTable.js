@@ -29,7 +29,7 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '50%',
+    width: '40%',
     marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
@@ -49,7 +49,6 @@ export default function TracksTable(props) {
           <TableRow>
             <StyledTableCell>Song Title</StyledTableCell>
             <StyledTableCell align="right">Artist</StyledTableCell>
-            <StyledTableCell align="right">@TwitterUsername</StyledTableCell>
             <StyledTableCell align="right">Position</StyledTableCell>
           </TableRow>
         </TableHead>

@@ -22,7 +22,7 @@ class BreakThroughApp extends React.Component {
         <div style={{display: 'flex', justifyContent: 'space-around', marginTop:50}}>
           <TracksTable tracks={this.props.tracks}/>
           <div style={{marginTop:24}}>
-            <TwitterTimelineEmbed sourceType="profile" screenName="flatironschool" options={{height: 375, width: 220}}  />
+            <TwitterTimelineEmbed sourceType="profile" screenName="flatironschool" options={{height: 375, width: 320}}  />
           </div>
         </div>
       </div>

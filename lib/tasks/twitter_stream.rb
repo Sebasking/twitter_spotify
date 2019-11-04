@@ -95,12 +95,17 @@ def parse_payload(chunk)
     begin
     data = JSON.parse(chunk)
     if data
-      info = data["data"]
-      text = info['text'].split("#")[0].rstrip.gsub(/ /, "+")
-      puts text
-      # song_info = text.split("#")[0]
-      # retweets = chunk["stats"]["retweet_count"]
-      # puts song_info
+      if data
+        info = data["data"]
+        song_info = info['text'].split("#")[0].split("-")
+        retweets = info['stats']['retweet_count']
+        # params = info['text'].split("-")[0].rstrip.gsub(/ /, "+")
+        title = song_info[0]
+        artist = song_info[1]
+        puts song_info
+        puts retweets
+        Spotify.find_track(title, artist)
+      end
     end
     rescue
       puts "No data chunk was #{chunk}"

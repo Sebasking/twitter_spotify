@@ -27,28 +27,29 @@ class Spotify < ApplicationRecord
       )
 
       ConsoleLogger.yellow(msg: "SPOTIFY SONG FOUND - #{title}")
+      add_track_to_playlist(track_id)
     rescue => e
       ConsoleLogger.red(msg: "SPOTIFY API ERROR - #{e}")
     end
   end
 
-  # def self.add_track_to_playlist(track_id, position = 0)
-  #   playlist_id = '3DJrkoZIfcrvKwYKrzrNsz'
-  #   user_id = 'i44qrghb4ntp2s8b5zfgtw7o4'
-  #
-  #   body = {
-  #     "uris": ["spotify:track:#{track_id}"],
-  #     "position": position
-  #   }.to_json
-  #
-  #   resp = RestClient.post("https://api.spotify.com/v1/users/#{user_id}/playlists/#{playlist_id}/tracks", body, headers = {
-  #       Authorization: "Bearer #{last.access_token}",
-  #       content_type: :json,
-  #       accept: :json
-  #     })
-  #
-  #   resp_json = JSON.parse(resp.body)
-  #
-  #   puts 'COMPLETE'
-  # end
+  def self.add_track_to_playlist(track_id, position = 0)
+    playlist_id = '3DJrkoZIfcrvKwYKrzrNsz'
+    user_id = 'i44qrghb4ntp2s8b5zfgtw7o4'
+
+    body = {
+      "uris": ["spotify:track:#{track_id}"],
+      "position": position
+    }.to_json
+
+    resp = RestClient.post("https://api.spotify.com/v1/users/#{user_id}/playlists/#{playlist_id}/tracks", body, headers = {
+        Authorization: "Bearer #{last.access_token}",
+        content_type: :json,
+        accept: :json
+      })
+
+    resp_json = JSON.parse(resp.body)
+
+    puts 'COMPLETE'
+  end
 end

@@ -102,8 +102,6 @@ def parse_payload(chunk)
         # params = info['text'].split("-")[0].rstrip.gsub(/ /, "+")
         title = song_info[0]
         artist = song_info[1]
-        puts song_info
-        puts retweets
         Spotify.find_track(title, artist)
       end
     end

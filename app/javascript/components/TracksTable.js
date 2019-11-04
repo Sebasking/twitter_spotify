@@ -29,7 +29,7 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '40%',
+    width: '50%',
     marginTop: theme.spacing(3),
     overflowX: 'auto',
   },

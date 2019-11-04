@@ -15,13 +15,12 @@ class SpotifyController < ApplicationController
 
     @spotify = Spotify.last
     @spotify.update(
-      auth_token: auth_params['access_token'],
+      access_token: auth_params['access_token'],
       refresh_token: auth_params['refresh_token']
     )
   end
 
   def create
-
     query_params = {
       client_id: Spotify.last.client_id,
       response_type: "code",

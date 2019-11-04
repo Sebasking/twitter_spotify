@@ -10,7 +10,7 @@ class Spotify < ApplicationRecord
 
     begin
       resp = RestClient.get("#{url+track_query+type+market}", headers = {
-          Authorization: "Bearer #{last.auth_token}"
+          Authorization: "Bearer #{last.access_token}"
         })
       ConsoleLogger.green(msg: 'SPOTIFY API REQUEST')
       resp_json = JSON.parse(resp.body)
@@ -42,7 +42,7 @@ class Spotify < ApplicationRecord
   #   }.to_json
   #
   #   resp = RestClient.post("https://api.spotify.com/v1/users/#{user_id}/playlists/#{playlist_id}/tracks", body, headers = {
-  #       Authorization: "Bearer #{last.auth_token}",
+  #       Authorization: "Bearer #{last.access_token}",
   #       content_type: :json,
   #       accept: :json
   #     })

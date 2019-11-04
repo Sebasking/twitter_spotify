@@ -26,18 +26,18 @@ export default class TrackRow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevPosition = prevProps.track.position
-    const { position } = this.props.track
+    // const prevPosition = prevProps.track.position
+    // const { position } = this.props.track
 
-    if (prevPosition !== position) {
-      if (prevPosition < position){
-        this.updateAndNotifyPosition(1)
-      } else {
-        this.updateAndNotifyPosition(2)
-      }
-    } else {
-      this.updateAndNotifyPosition(0)
-    }
+    // if (prevPosition !== position) {
+    //   if (prevPosition < position){
+    //     this.updateAndNotifyPosition(1)
+    //   } else {
+    //     this.updateAndNotifyPosition(2)
+    //   }
+    // } else {
+    //   this.updateAndNotifyPosition(0)
+    // }
   }
 
   updateAndNotifyPosition(status) {

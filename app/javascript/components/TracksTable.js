@@ -46,7 +46,7 @@ state = { tracks: [] }
   }
 
   handleTrackCreate = response => {
-    console.log(response)
+    this.setState({tracks: [...this.state.tracks, response.track]})
   }
 
   render () {

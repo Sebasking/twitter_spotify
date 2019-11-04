@@ -102,14 +102,19 @@ def parse_payload(chunk)
         # params = info['text'].split("-")[0].rstrip.gsub(/ /, "+")
         title = song_info[0]
         artist = song_info[1]
-        Spotify.find_track(title, artist)
+        body = {
+          "title": title,
+          "artist": artist
+        }.to_json
+        RestClient.post("localhost:3000/tracks", body, headers = {
+          content_type: :json,
+          accept: :json
+        })
       end
     end
     rescue
-      puts "No data chunk was #{chunk}"
+      puts "Waiting on a Breakthrough"
     end
-    # make request to zapier
-    # talk to spotify for the place list
 end
 
 def stream_connect
@@ -136,7 +141,7 @@ end
 
 #   # Delete all rules
 #   delete_all_rules(@rules)
-  
+
 #   # Add rules to the stream
 #   set_rules(@sample_rules)
 # end

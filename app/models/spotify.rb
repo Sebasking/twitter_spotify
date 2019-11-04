@@ -19,15 +19,17 @@ class Spotify < ApplicationRecord
       title       = resp_json['tracks']['items'][0]['name']
       artist_name = resp_json['tracks']['items'][0]['artists'][0]['name']
 
-      Track.create(
+      track = Track.create(
         spotify_id: track_id,
         title: title,
         artist_name: artist_name,
         twitter_username: '@flatironschool_fake_twitter'
       )
 
+
       ConsoleLogger.yellow(msg: "SPOTIFY SONG FOUND - #{title}")
-      add_track_to_playlist(track_id)
+      self.add_track_to_playlist(track_id)
+      track
     rescue => e
       ConsoleLogger.red(msg: "SPOTIFY API ERROR - #{e}")
     end

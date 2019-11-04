@@ -34,5 +34,4 @@ class SpotifyController < ApplicationController
     ConsoleLogger.green(msg: 'SPOTIFY API REQUEST')
     redirect_to "#{url}?#{query_params.to_query}"
   end
-
 end

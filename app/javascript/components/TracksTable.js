@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TrackRow from './TrackRow';
+import { ActionCable, ActionCableConsumer } from 'react-actioncable-provider'
 
 
 const StyledTableCell = withStyles(theme => ({
@@ -38,26 +39,45 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TracksTable(props) {
-  const classes = useStyles();
-  const { tracks } = props
+class TracksTable extends Component {
+state = { tracks: [] }
+  componentDidMount() {
+    this.setState({tracks: this.props.tracks})
+  }
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Song Title</StyledTableCell>
-            <StyledTableCell align="right">Artist</StyledTableCell>
-            <StyledTableCell align="right">Position</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tracks.map(track => (
-            <TrackRow track={track} key={track.id} StyledTableRow={StyledTableRow} StyledTableCell={StyledTableCell} />
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  )
+  handleTrackCreate = response => {
+    console.log(response)
+  }
+
+  render () {
+    // const classes = useStyles();
+    const { tracks } = this.state
+
+    return (
+      <>
+      <ActionCableConsumer
+          channel={{ channel: 'MessageChannel' }}
+          onReceived={this.handleTrackCreate}
+      />
+      <Paper className={'jdf'}>
+        <Table className={'jdf'} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Song Title</StyledTableCell>
+              <StyledTableCell align="right">Artist</StyledTableCell>
+              <StyledTableCell align="right">Position</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tracks.map(track => (
+              <TrackRow track={track} key={track.id} StyledTableRow={StyledTableRow} StyledTableCell={StyledTableCell} />
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+      </>
+    )
+  }
 }
+
+export default TracksTable;

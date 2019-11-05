@@ -2,18 +2,31 @@ import React from "react"
 import TracksTable from './TracksTable'
 import Instructions from './Instructions'
 import { TwitterTimelineEmbed } from 'react-twitter-embed'
-import { ActionCableProvider } from 'react-actioncable-provider'
 
 
 class BreakThroughApp extends React.Component {
+  state = {tracks: []}
   handleIncomingTrack = response => {
     console.log(response)
   }
 
+  componentDidMount() {
+    //fetch track here
+    fetch('http://localhost:3000/api/v1/get_tracks').then((req) => {
+      return req.json()
+    })
+    .then((data) => {
+      const { tracks } = data
+      this.setState({ tracks })
+    })
+  }
+
   render () {
-    console.log(this.props)
-    return (
-      <ActionCableProvider url="ws://localhost:3000/cable">
+    const { tracks } = this.state
+    if (tracks.length <= 0) {
+      return <div>{tracks.length <= 0}</div>
+    } else {
+      return (
         <div>
           <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <img src={window.flatiron_logo} style={{height: '25px', paddingTop: '5px'}}/>
@@ -25,14 +38,14 @@ class BreakThroughApp extends React.Component {
           </div>
 
           <div style={{display: 'flex', justifyContent: 'space-around', marginTop:50}}>
-            <TracksTable tracks={this.props.tracks}/>
+            <TracksTable tracks={this.state.tracks}/>
             <div style={{marginTop:24}}>
               <TwitterTimelineEmbed sourceType="profile" screenName="flatironschool" options={{height: 375, width: 600}}  />
             </div>
           </div>
         </div>
-      </ActionCableProvider>
     );
+    }
   }
 
   styles (){

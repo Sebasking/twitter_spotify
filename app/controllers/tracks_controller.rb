@@ -5,6 +5,11 @@ class TracksController < ApplicationController
     @tracks = Tracks.all
   end
 
+  def get_tracks
+    tracks = Track.all
+    render json: {tracks: tracks}, status: 200
+  end
+
   def create
     title = params[:title]
     artist = params[:artist]

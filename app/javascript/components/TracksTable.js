@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TrackRow from './TrackRow';
-import { ActionCable, ActionCableConsumer } from 'react-actioncable-provider'
+import { ActionCableConsumer } from 'react-actioncable-provider'
 
 
 const StyledTableCell = withStyles(theme => ({
@@ -58,6 +58,7 @@ state = { tracks: [] }
       <ActionCableConsumer
           channel={{ channel: 'MessageChannel' }}
           onReceived={this.handleTrackCreate}
+          onDisconnected={() => {console.log("Disconnected")}}
       />
       <Paper className={'jdf'}>
         <Table className={'jdf'} aria-label="customized table">

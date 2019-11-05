@@ -11,7 +11,6 @@ class BreakThroughApp extends React.Component {
   }
 
   componentDidMount() {
-    //fetch track here
     fetch('http://localhost:3000/api/v1/get_tracks').then((req) => {
       return req.json()
     })
